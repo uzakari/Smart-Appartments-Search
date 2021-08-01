@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dotnet-SmartApartment.Management.BackgroundSerciveJob-67C1D7E7-96C6-43A7-9643-BF72BD2EF2BD</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartApartment.Management.Application\SmartApartment.Management.Application.csproj" />
+    <ProjectReference Include="..\SmartApartment.Management.Infrastructure\SmartApartment.Management.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
