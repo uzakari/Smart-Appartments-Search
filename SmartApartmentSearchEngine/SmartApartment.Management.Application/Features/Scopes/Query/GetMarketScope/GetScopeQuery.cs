@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartApartment.Management.Application.Features.Scopes.Query.GetMarketScope
 {
-    public class GetScopeQuery: IRequest<IEnumerable<SateAndCityVm>>
+    public class GetScopeQuery : IRequest<IEnumerable<SateAndCityVm>>
     {
 
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartApartment.Management.Application.Features.Search.Query.GetSmartHomeSearch
 {
-    class GetSearchResultHandler : IRequestHandler<GetSearchQuery, SearchResultVm>
+    public class GetSearchResultHandler : IRequestHandler<GetSearchQuery, SearchResultVm>
     {
         private readonly ISearchService _searchService;
 

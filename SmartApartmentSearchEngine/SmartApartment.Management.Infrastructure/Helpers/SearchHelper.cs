@@ -57,7 +57,7 @@ namespace SmartApartment.Management.Infrastructure.Helpers
                                       .Must(mu => mu
                                       .MultiMatch(m => m
                                              .Fields(f => f.Field(ff => ff.formerName)
-                                             .Field(f => f.name))
+                                             .Field(f => f.name).Field(f => f.city).Field(f=> f.streetAddress))
                                              .Query(searchQuery)), mn => mn
                                               .Match(m => m
                                                   .Field(f => f.market)
@@ -91,6 +91,9 @@ namespace SmartApartment.Management.Infrastructure.Helpers
                     market = pro.market,
                     isManagement = true
                 }).ToList();
+
+                combineSearchResultResponse = propertyResult.Concat(managementResult).Take(25);
+
             }
             else
             {
@@ -100,8 +103,7 @@ namespace SmartApartment.Management.Infrastructure.Helpers
                       .Must(mu => mu
                       .MultiMatch(m => m
                              .Fields(f => f.Field(ff => ff.formerName)
-                             .Field(f => f.name))
-                             .Query(searchQuery))
+                             .Field(f => f.name).Field(f => f.city).Field(f => f.streetAddress)).Query(searchQuery))
                              ))));
 
                 propertyResult = searchPropertyResponse.Documents.Select(pro => new SearchResultContents
@@ -128,9 +130,12 @@ namespace SmartApartment.Management.Infrastructure.Helpers
                     isManagement = true
                 }).ToList();
 
+                // management should come first........
+
+                combineSearchResultResponse = managementResult.Concat(propertyResult).Take(25);
+
             }
 
-            combineSearchResultResponse = propertyResult.Concat(managementResult).Take(25);
         }
 
     }
