@@ -130,8 +130,6 @@ namespace SmartApartment.Management.Infrastructure.Helpers
                     isManagement = true
                 }).ToList();
 
-                // management should come first........
-
                 combineSearchResultResponse = managementResult.Concat(propertyResult).Take(25);
 
             }

@@ -25,38 +25,38 @@ namespace SmartApartment.Management.Infrastructure.Repositories
 
             var client = new ElasticClient(settings);
 
-            //var management = UploadHelper.GetFileToParse("management");
+            var management = SearchHelper.GetFileToParse("management");
 
-            //var parseMangements = UploadHelper.ParseDocument<IEnumerable<ManagementRoot>>(management);
+            var parseMangements = SearchHelper.ParseDocument<IEnumerable<ManagementRoot>>(management);
 
-            //var managementindexResponse = new BulkResponse();
+            var managementindexResponse = new BulkResponse();
 
-            //var managementContentCollection = new List<ManagementContent>();
-            //foreach (var item in parseMangements)
-            //{
-            //    managementContentCollection.Add(item.mgmt);
-            //}
+            var managementContentCollection = new List<ManagementContent>();
+            foreach (var item in parseMangements)
+            {
+                managementContentCollection.Add(item.mgmt);
+            }
 
-            //managementindexResponse = await client.IndexManyAsync(managementContentCollection);
-            //managementindexResponse.LogIndexManyResponse(_logger);
-
-
-            //var property = UploadHelper.GetFileToParse("propertise");
-
-            //var parseProperties = UploadHelper.ParseDocument<IEnumerable<PropertyRoot>>(property);
-            //var propertiseindexResponse = new BulkResponse();
-            //var propertyContentCollection = new List<PropertyContent>();
-
-            //foreach (var item in parseProperties)
-            //{
-            //    propertyContentCollection.Add(item.property);
-            //}
-            //propertiseindexResponse = await client.IndexManyAsync(propertyContentCollection);
-
-            //propertiseindexResponse.LogIndexManyResponse(_logger);
+            managementindexResponse = await client.IndexManyAsync(managementContentCollection);
+            managementindexResponse.LogIndexManyResponse(_logger);
 
 
-         
+            var property = SearchHelper.GetFileToParse("propertise");
+
+            var parseProperties = SearchHelper.ParseDocument<IEnumerable<PropertyRoot>>(property);
+            var propertiseindexResponse = new BulkResponse();
+            var propertyContentCollection = new List<PropertyContent>();
+
+            foreach (var item in parseProperties)
+            {
+                propertyContentCollection.Add(item.property);
+            }
+            propertiseindexResponse = await client.IndexManyAsync(propertyContentCollection);
+
+            propertiseindexResponse.LogIndexManyResponse(_logger);
+
+
+
 
         }
 
