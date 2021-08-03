@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-verification-input-wrap">
+
+            <ul>
+                <h1 style="font-size: 48px; font-weight: 400; margin: 2;">Welcome!</h1>
+                <li>All Your favourite apartment is here.</li>
+            </ul>
+				<div class="row" [formGroup] ="searchForm">
+					<div class="col-md-8">
+						<input id="searchInput" type="text" formControlName="searchInput" placeholder="Search For Appartments" class="form-control">
+					</div>
+					<div class="col-md-4">
+						<div class="box">
+							<select class="form-control" formControlName="citySelector" *ngIf="states" (change)="onStateChange()" multiple>
+ 								<optgroup  label="All States">
+									  <option value="ALL">All City</option>
+									</optgroup>	
+							    <optgroup [label]="item.state" *ngFor="let item of states">								 
+									 <option [value]="city" *ngFor="let city of item.cities">{{city}}</option>
+								</optgroup>
+									 		  
+							</select>
+						</div>
+					</div>
+				</div>
+			<br>
+			<div *ngIf="searchContent.length > 0">
+				<div class="well search-result"  *ngFor="let appartment of searchContent">
+					<div class="row">
+						<a href="#">
+							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+								<img class="img-responsive" [src]="appartment?.isManagement? 'assets/images/management-icon.png': 'assets/images/property-icon.jpg'" alt="">
+							</div>
+							<div class="col-xs-6 col-sm-9 col-md-9 col-lg-10 title">
+								<h3>{{appartment?.name}}</h3>
+								<p>{{appartment?.market}}</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="well search-result" *ngIf="searchForm.dirty && searchContent?.length === 0">
+				<p> <a href="https://smartapartmentdata.com/" target="_blank">Try Our Pro Search Site</a> </p>
+			</div>
+        </div>
+    </div>
+</div>
+
